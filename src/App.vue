@@ -1,0 +1,103 @@
+<template>
+  <div style="position: relative;width: 100vw;height: 100vh;overflow-y: hidden">
+    <Player ref="player" />
+    <playView id="playView" :style="showPlayView?'':'transform:translateY(110%)'" />
+    <AppLoading v-if="!showApp" />
+    <router-view />
+    <LoginDialog v-if="showDialog===0" class="login-dialog" />
+    <UserDialog v-if="showDialog===1" class="user-dialog" />
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent, computed } from 'vue'
+import { useStore } from 'vuex'
+import AppLoading from '@/components/AppLoading.vue'
+import Player from '@/components/Player.vue'
+import playView from '@/pages/playView/playView.vue'
+import LoginDialog from '@/components/LoginDialog.vue'
+import UserDialog from '@/components/UserDialog.vue'
+import TestCookies from '@/components/TestCookies.vue'
+// document.body.style.setProperty('--main-color', '#1DCF9F')
+
+export default defineComponent({
+  name: 'App',
+  components: {
+    TestCookies,
+    AppLoading,
+    Player,
+    playView,
+    LoginDialog,
+    UserDialog
+  },
+  setup() {
+    const store = useStore()
+    const showPlayView = computed(() => store.state.showPlayView)
+    const showDialog = computed(() => store.state.showDialog)
+    const showApp = computed(() => store.state.showApp)
+
+    return {
+      showPlayView,
+      showDialog,
+      showApp
+    }
+  }
+})
+</script>
+
+<style>
+:root{
+  /*#e2561d */
+  /*--primary-color: #1DCF9F;*/
+  --primary-color: #e2561d;
+  --light-color: rgba(255, 255, 255, 0.1);
+  /*--primary-color: rgb(244, 93, 93);*/
+  --block-size: 160px;
+  --block-num: 5;
+  --page-width: 1000px
+}
+::-webkit-scrollbar {
+  width: 6px; /* 纵向滚动条*/
+  height: 6px; /* 横向滚动条 */
+  background-color: #fff;
+}
+
+/*定义滑块*/
+::-webkit-scrollbar-thumb {
+  background-color: #cccccc;
+  border-radius: 20px;
+}
+#playView{
+  position: absolute;
+  min-width: 1200px;
+  width: 100%;
+  height: 100%;
+  background: #404040;
+  z-index: 10000;
+  transition: 0.5s;
+  /*background: #fafafa;*/
+}
+.login-dialog{
+  min-width: 1200px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+}
+.user-dialog{
+  min-width: 200px;
+  position: absolute;
+  top: 60px;
+  right: 30px;
+  z-index: 10000;
+}
+.discolour {
+  cursor: pointer;
+  color: rgb(102, 102, 102);
+}
+.discolour:hover {
+  color: var(--primary-color);
+}
+</style>

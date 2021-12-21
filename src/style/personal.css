@@ -1,0 +1,18 @@
+.h1{
+    font-size: 32px;
+    font-weight: bolder;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.h2{
+    font-size: 24px;
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+
+.h3{
+    font-size: 18px;
+    /*font-weight: bold;*/
+}

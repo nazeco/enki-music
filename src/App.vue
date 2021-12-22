@@ -1,8 +1,8 @@
 <template>
   <div style="position: relative;width: 100vw;height: 100vh;overflow-y: hidden">
+    <AppLoading v-if="!showApp" />
     <Player ref="player" />
     <playView id="playView" :style="showPlayView?'':'transform:translateY(110%)'" />
-    <AppLoading v-if="!showApp" />
     <router-view />
     <LoginDialog v-if="showDialog===0" class="login-dialog" />
     <UserDialog v-if="showDialog===1" class="user-dialog" />

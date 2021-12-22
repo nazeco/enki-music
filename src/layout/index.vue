@@ -447,16 +447,16 @@ export default defineComponent({
       window.onresize = () => {
         resetSize()
       }
+      init()
     })
 
-    // 初始化5秒后显示主页面
+    // 初始化4秒后显示主页面
     const delay=(ms: number) => new Promise((res) => setTimeout(res,ms))
     const init = async() => {
-      // store.commit('setShowApp', false)
       await delay(4000)
       store.commit('setShowApp', true)
     }
-    init()
+
 
     return {
       route,

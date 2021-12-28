@@ -51,6 +51,7 @@ export default defineComponent({
   /*--primary-color: #1DCF9F;*/
   --primary-color: #e2561d;
   --light-color: rgba(255, 255, 255, 0.1);
+  --antd-wave-shadow-color: #e2561d;
   /*--primary-color: rgb(244, 93, 93);*/
   --block-size: 160px;
   --block-num: 5;

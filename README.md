@@ -5,6 +5,8 @@ API 使用 [NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusic
 
 部署于 Vercel 的 [预览版本](https://enki-music.naseko.com)
 
+配置页后端 [Enki-Api](https://github.com/nazeco/enki-api)
+
 ## 预览
 ![首页图](./src/assets/readme/01.png)
 
@@ -13,6 +15,7 @@ API 使用 [NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusic
 - 网易云账号登录（扫码/手机/邮箱登录）
 - 支持 MV 播放
 - 支持歌词显示
+- 功能完善中……
 
 ## 安装
 ```shell

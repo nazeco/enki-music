@@ -2,7 +2,7 @@
   <div>
     <Layout class="layout">
       <LayoutSider class="sider">
-        <a class="logo" href="#">
+        <a class="logo" @click="pageChange(0)">
           <img width="120" src="@/assets/logo-enki.png">
         </a>
         <div class="menu">
@@ -92,7 +92,7 @@
             <span class="discolour" style="margin: 0 10px" @click="showDialog">
               {{ nickName }}
               <svg-icon name="down" style="font-size: 11px" /></span>
-            <SettingOutlined class="discolour" />
+            <SettingOutlined class="discolour" @click="pageChange(6)" />
           </div>
         </LayoutHeader>
         <LayoutContent id="content" class="content">
@@ -236,6 +236,12 @@ export default defineComponent({
         label: '最近播放',
         icon: 'HistoryOutlined',
         path: '/historyPlay'
+      },
+      {
+        index: 6,
+        label: '设置',
+        icon: 'SettingOutlined',
+        path: '/setting'
       }
     ]
 
@@ -290,7 +296,7 @@ export default defineComponent({
     // })
 
     const pageChange = (index: number) => {
-      if (index === 0) {
+      if (index === 0 || index === 6) {
         router.push({ path: itemList[index].path })
       } else {
         message.warning('该功能正在开发')

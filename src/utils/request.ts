@@ -3,12 +3,12 @@ import { message } from 'ant-design-vue'
 import store from '@/store'
 import Cookie from 'js-cookie'
 
-const service = axios.create({
+const musicService = axios.create({
   baseURL: (import.meta.env.VITE_APP_BASE_URL) as string,
   timeout: 10000,
   withCredentials: true
 })
-service.interceptors.request.use((config) => {
+musicService.interceptors.request.use((config) => {
   const lastTime = Number(localStorage.getItem('lastTime'))
   const nowTime = new Date().getTime()
   if (lastTime) {
@@ -34,7 +34,7 @@ service.interceptors.request.use((config) => {
   return config
 }, (error) => Promise.reject(error))
 
-service.interceptors.response.use(
+musicService.interceptors.response.use(
 
   (response: { data: any; }) => {
     const res = response.data
@@ -58,4 +58,43 @@ service.interceptors.response.use(
   }
 )
 
-export default service
+const settingService = axios.create({
+  baseURL: '/sapi',
+  timeout: 10000,
+  withCredentials: true
+})
+settingService.interceptors.request.use((config) => {
+  if (config.method === 'post') {
+    config.data = {
+      ...config.data
+    }
+    config.headers = {
+      'Content-Type': 'application/json',
+      'satoken': localStorage.getItem('tokenValue')
+    }
+  } else if (config.method === 'get') {
+    config.params = {
+      ...config.params,
+    }
+    config.headers = {
+      'satoken': localStorage.getItem('tokenValue')
+    }
+  }
+  return config
+}, (error) => Promise.reject(error))
+
+settingService.interceptors.response.use(
+
+  (response: { data: any; }) => {
+    const res = response.data
+    return res
+  },
+  (error: { message: any; }) => {
+    console.log(`err${error}`) // for debug
+    message.error('网络异常，请重试！')
+    return Promise.reject(error)
+  }
+)
+export default musicService
+
+export {settingService}

@@ -3,6 +3,7 @@ import Layout from '@/layout/index.vue'
 import recommend from '@/pages/recommend.vue'
 import musicHall from '@/pages/MusicHall/musicHall.vue'
 import myLike from '@/pages/myLike/myLike.vue'
+import setting from '@/pages/setting/setting.vue'
 import historyPlay from '@/pages/historyPlay/historyPlay.vue'
 import playList from '@/pages/playList/playList.vue'
 import album from '@/pages/album/album.vue'
@@ -30,6 +31,11 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: 'myLike',
         component: myLike,
+        meta: { title: 'Enki Music', keepAlive: true }
+      },
+      {
+        path: 'setting',
+        component: setting,
         meta: { title: 'Enki Music', keepAlive: true }
       },
       {

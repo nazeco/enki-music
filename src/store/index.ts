@@ -29,9 +29,15 @@ const store = createStore({
     loading: false,
     showApp: false, // App 默认初始化5秒后显示
     showPlayView: false,
-    showDialog: -1, // 0：登录弹窗 1：用户信息弹窗
+    showDialog: -1, // 0：登录弹窗 1：用户信息弹窗 2:同步账户登陆弹窗
     loginState: false, // false：未登录  true：已登录
-    refreshLogin: false
+    refreshLogin: false,
+    tokenValue: null,
+    settingLoginState: false,
+    language: 'zh',
+    theme: 'default',
+    quality: 'high',
+    showTrans: true
   },
   mutations: {
     setBlockNum(state, num) {
@@ -79,6 +85,28 @@ const store = createStore({
     },
     setRefreshLogin(state, value) {
       state.refreshLogin = value
+    },
+    setTokenValue(state, value) {
+      state.tokenValue = value
+    },
+    setSettingLoginState(state, value) {
+      state.settingLoginState = value
+    },
+    setLanguage(state, value) {
+      localStorage.setItem('language', value)
+      state.language = value
+    },
+    setTheme(state, value) {
+      localStorage.setItem('theme', value)
+      state.theme = value
+    },
+    setQuality(state, value) {
+      localStorage.setItem('quality', value)
+      state.quality = value
+    },
+    setShowTrans(state, value) {
+      localStorage.setItem('showTrans', value)
+      state.showTrans = value
     }
   },
   getters: {
@@ -126,7 +154,25 @@ const store = createStore({
     },
     getRefreshLogin(state) {
       return state.refreshLogin
-    }
+    },
+    getTokenValue(state) {
+      return state.tokenValue
+    },
+    getSettingLoginState(state) {
+      return state.settingLoginState
+    },
+    getLanguage(state) {
+      return state.language
+    },
+    getTheme(state) {
+      return state.theme
+    },
+    getQuality(state) {
+      return state.quality
+    },
+    getShowTrans(state) {
+      return state.showTrans
+    },
   },
   actions: {},
   modules: {}

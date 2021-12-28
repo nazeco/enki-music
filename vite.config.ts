@@ -1,15 +1,22 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 import { svgBuilder } from './src/plugins/svgBuilder'
 import styleImport from 'vite-plugin-style-import'
-// https://vitejs.dev/config/
 
+const config = loadEnv('development', './')
 export default defineConfig({
   base: './',
   server: {
-    port: 8080
+    port: 8080,
     // open: true,
+    proxy: {
+      '/sapi': {
+        target: 'http://localhost:8088',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/sapi/, '')
+      }
+    }
   },
   plugins: [
     vue(),
